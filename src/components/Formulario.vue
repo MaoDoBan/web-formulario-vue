@@ -16,25 +16,11 @@
       <input type="checkbox" required v-model="termos">
       <label>Aceito os termos de uso</label>
     </div>
-
-    <div>
-      <input type="checkbox" value="luigi" v-model="nomes">
-      <label>Luigi</label>
-    </div>
-    <div>
-      <input type="checkbox" value="mario" v-model="nomes">
-      <label>Mario</label>
-    </div>
-    <div>
-      <input type="checkbox" value="ricardo" v-model="nomes">
-      <label>Ricardo</label>
-    </div>
   </form>
   <p>Email: {{ email }}</p>
   <p>Password: {{ password }}</p>
   <p>Cargo: {{ cargo }}</p>
   <p>Termos: {{ termos }}</p>
-  <p>Nomes: {{ nomes }}</p>
 </template>
 
 <script>
@@ -44,8 +30,7 @@ export default {
       email: "",
       password: "",
       cargo: "webdev",
-      termos: false,
-      nomes: []
+      termos: false
     };
   }
 }
