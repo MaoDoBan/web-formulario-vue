@@ -1,10 +1,11 @@
 <template>
-  <form>
+  <form @submit.prevent="handleSubmit">
     <label>Email:</label>
     <input type="email" required v-model="email">
     
-    <label>Password:</label>
-    <input type="password" required v-model="password">
+    <label>Senha:</label>
+    <input type="password" required v-model="senha">
+    <div v-if="erroSenha" class="erro">{{ erroSenha }}</div>
 
     <label>Cargo:</label>
     <select v-model="cargo">
@@ -22,9 +23,13 @@
       <input type="checkbox" required v-model="termos">
       <label>Aceito os termos de uso</label>
     </div>
+
+    <div class="submit">
+      <button>Criar uma conta</button>
+    </div>
   </form>
   <p>Email: {{ email }}</p>
-  <p>Password: {{ password }}</p>
+  <p>Senha: {{ senha }}</p>
   <p>Cargo: {{ cargo }}</p>
   <p>Termos: {{ termos }}</p>
 </template>
@@ -34,11 +39,12 @@ export default {
   data(){
     return {
       email: "",
-      password: "",
+      senha: "",
       cargo: "webdev",
       termos: false,
       tempSkill: "",
-      skills: []
+      skills: [],
+      erroSenha: ""
     };
   },
   methods: {
@@ -50,6 +56,16 @@ export default {
     },
     deleteSkill(skill){
       this.skills = this.skills.filter((item) => item !== skill);
+    },
+    handleSubmit(){
+      this.erroSenha = this.senha.length < 13 ? "A senha precisa ter ao menos 13 caracteres!" : "";
+      if(this.passwordError) return;
+
+      console.log("email: ", this.email);
+      console.log("senha: ", this.senha);
+      console.log("cargo: ", this.cargo);
+      console.log("skills: ", this.skills);
+      console.log("aceitou os termos: ", this.termos);
     }
   }
 }
@@ -100,5 +116,22 @@ input[type="checkbox"]{
   font-weight: bold;
   color: #777;
   cursor: pointer;
+}
+button{
+  background: #0b6dff;
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: white;
+  border-radius: 20px;
+}
+.submit{
+  text-align: center;
+}
+.erro{
+  color: #ff0062;
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-weight: bold;
 }
 </style>
